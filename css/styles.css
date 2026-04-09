@@ -8,7 +8,7 @@
   --bg2:       #111111;
   --bg3:       #1A1A1A;
   --accent:    #C8F135;
-  --upwork:    #C8F135;
+  --upwork:    #6FDA44;
   --text1:     #F5F5F5;
   --text2:     #888888;
   --text3:     #444444;
@@ -397,7 +397,7 @@ nav.scrolled { padding:14px 64px; border-color: var(--border); }
 .contact-ctas { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:44px; position:relative; z-index:1; }
 .btn-upwork {
   display:inline-flex; align-items:center; gap:12px;
-  padding:17px 36px; background:#6FDA44; color:#0A0A0A;
+  padding:17px 36px; background:var(--upwork); color:var(--bg);
   font-size:14px; font-weight:700; font-family:var(--font-b);
   border:none; border-radius:100px; cursor:none; text-decoration:none;
   transition:filter .2s,transform .2s;
