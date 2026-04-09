@@ -27,7 +27,7 @@ gsap.fromTo('#hero .hero-sub, #hero .hero-ctas',
 const philItems = document.querySelectorAll('.phil-item');
 const philDots  = document.querySelectorAll('.phil-dot');
 const N = philItems.length;
-document.getElementById('philosophy-wrap').style.height = (N + 1) * 100 + 'vh';
+document.getElementById('philosophy-wrap').style.height = (N * 50 + 100) + 'vh';
 
 function showPhil(i) {
   philItems.forEach((p,j) => {
