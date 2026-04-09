@@ -13,10 +13,12 @@ gsap.to('#hero .hero-title', {
   y: -80, ease:'none',
   scrollTrigger: { trigger:'#hero', start:'top top', end:'bottom top', scrub:true }
 });
-gsap.to('#hero .hero-sub, #hero .hero-ctas', {
-  y: -40, opacity:0, ease:'none',
-  scrollTrigger: { trigger:'#hero', start:'40% top', end:'bottom top', scrub:true }
-});
+gsap.fromTo('#hero .hero-sub, #hero .hero-ctas',
+  { y:0, opacity:1 },
+  { y:-40, opacity:0, ease:'none',
+    scrollTrigger: { trigger:'#hero', start:'40% top', end:'bottom top', scrub:true }
+  }
+);
 
 /* PHILOSOPHY */
 const philItems = document.querySelectorAll('.phil-item');
