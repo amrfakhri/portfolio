@@ -16,7 +16,10 @@ gsap.to('#hero .hero-title', {
 gsap.fromTo('#hero .hero-sub, #hero .hero-ctas',
   { y:0, opacity:1 },
   { y:-40, opacity:0, ease:'none',
-    scrollTrigger: { trigger:'#hero', start:'40% top', end:'bottom top', scrub:true }
+    scrollTrigger: {
+      trigger:'#hero', start:'40% top', end:'bottom top', scrub:true,
+      onLeaveBack: () => gsap.set('#hero .hero-sub, #hero .hero-ctas', { opacity:1, y:0 })
+    }
   }
 );
 
