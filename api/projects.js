@@ -35,7 +35,10 @@ export default async function handler(req, res) {
       year:        page.properties.Year?.rich_text?.[0]?.plain_text    ?? '',
       label:       page.properties.Label?.rich_text?.[0]?.plain_text   ?? '',
       image:       page.properties.Image?.url                          ?? null,
+      images:      (page.properties.Images?.rich_text?.[0]?.plain_text ?? '')
+                     .split('\n').map(s => s.trim()).filter(Boolean),
       link:        page.properties.Link?.url                           ?? '#',
+      platform:    page.properties.Platform?.select?.name              ?? null,
       featured:    page.properties.Featured?.checkbox                  ?? false,
       order:       page.properties.Order?.number                       ?? 0,
     }));

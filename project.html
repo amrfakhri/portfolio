@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — Amr Fakhri</title>
+  <meta name="description" content="Project case study by Amr Fakhri — Senior UX/UI Designer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ─── CURSOR ──────────────────────────────────────── -->
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- ─── NAV ─────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="/" class="nav-logo">Amr<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#experience">Experience</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <div class="nav-r">
+    <a href="mailto:amr.fakhri@gmail.com" class="nav-cta">Hire me</a>
+  </div>
+</nav>
+
+<!-- ─── MAIN ─────────────────────────────────────────── -->
+<main>
+
+  <!-- Loading state -->
+  <div id="pd-loading">
+    <div class="pd-skel-title proj-skeleton"></div>
+    <div class="pd-skel-sub proj-skeleton"></div>
+    <div class="pd-skel-device proj-skeleton" id="pd-skel-device">
+      <!-- chrome bar shown for web skeleton -->
+      <div class="pd-skel-chrome" id="pd-skel-chrome"></div>
+    </div>
+  </div>
+
+  <!-- Error state -->
+  <div id="pd-error" hidden>
+    <div class="pd-error-code">404</div>
+    <div class="pd-error-msg">Project not found</div>
+    <a href="/#work" class="btn-prim" style="margin-top:8px">
+      ← Back to Work
+    </a>
+  </div>
+
+  <!-- Content -->
+  <div id="pd-content" hidden>
+
+    <!-- Hero -->
+    <section class="pd-hero">
+      <a href="/#work" class="pd-back">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Work
+      </a>
+
+      <div class="pd-meta">
+        <span class="pd-tag-chip" id="pd-tag"></span>
+        <div class="pd-meta-dot"></div>
+        <span class="pd-year-lbl" id="pd-year"></span>
+      </div>
+
+      <h1 class="pd-title" id="pd-title"></h1>
+      <p class="pd-desc" id="pd-desc"></p>
+
+      <a id="pd-link" class="btn-prim" target="_blank" rel="noopener noreferrer">
+        View Live Project
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </section>
+
+    <!-- Device Slider -->
+    <section class="pd-slider-section" id="pd-slider-section">
+      <div id="pd-device" class="pd-device">
+        <!-- injected by JS -->
+      </div>
+      <div class="pd-controls" id="pd-controls">
+        <button class="pd-arrow" id="pd-prev" aria-label="Previous slide">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="pd-dots" id="pd-dots"></div>
+        <button class="pd-arrow" id="pd-next" aria-label="Next slide">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Info -->
+    <section class="pd-info-section">
+      <div class="pd-info-grid">
+        <div>
+          <div class="pd-info-label">Category</div>
+          <div class="pd-info-val" id="pd-cat"></div>
+        </div>
+        <div>
+          <div class="pd-info-label">Year</div>
+          <div class="pd-info-val" id="pd-yr"></div>
+        </div>
+        <div>
+          <div class="pd-info-label">Type</div>
+          <div class="pd-info-val" id="pd-type"></div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /pd-content -->
+
+</main>
+
+<!-- ─── FOOTER ────────────────────────────────────────── -->
+<footer>
+  <div class="f-copy">© 2025 Amr Fakhri</div>
+  <div class="f-made">Designed with <span>♥</span> in Cairo, Egypt</div>
+</footer>
+
+<!-- ─── SCRIPTS ───────────────────────────────────────── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/main.js"></script>
+<script src="js/project.js"></script>
+</body>
+</html>

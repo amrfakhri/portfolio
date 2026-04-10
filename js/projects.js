@@ -80,7 +80,7 @@
 
   // ── Render grid ──────────────────────────────────────────
   gridEl.innerHTML = grid.map((p, i) => `
-    <div class="p-card" data-cat="${esc(p.category)}" style="--d:${i * 0.06}s">
+    <a class="p-card" data-cat="${esc(p.category)}" style="--d:${i * 0.06}s" href="/project.html?id=${esc(p.id)}&frame=${p.category === 'app' || p.platform === 'mobile' ? 'mobile' : 'web'}">
       <div class="p-card-img" ${cardImg(p)}>
         ${cardLabel(p)}
       </div>
@@ -89,7 +89,7 @@
         <div class="p-card-name">${esc(p.name)}</div>
         <div class="p-card-year">${esc(p.year)}</div>
       </div>
-    </div>
+    </a>
   `).join('');
 
   // ── GSAP: reveal animations ──────────────────────────────
@@ -120,6 +120,15 @@
         trigger: el.closest('.parallax-wrap'),
         start: 'top bottom', end: 'bottom top', scrub: true
       }
+    });
+  });
+
+  // ── Click navigation on featured cards ──────────────────
+  featuredEl.querySelectorAll('.proj-feat').forEach((el, i) => {
+    el.addEventListener('click', e => {
+      if (e.target.closest('.p-link')) return;
+      const frame = featured[i].category === 'app' || featured[i].platform === 'mobile' ? 'mobile' : 'web';
+      window.location.href = `/project.html?id=${featured[i].id}&frame=${frame}`;
     });
   });
 
