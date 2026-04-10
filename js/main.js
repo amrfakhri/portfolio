@@ -1,7 +1,10 @@
-document.getElementById('themeBtn').addEventListener('click', () => {
-  document.documentElement.dataset.theme =
-    document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-});
+const themeBtn = document.getElementById('themeBtn');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    document.documentElement.dataset.theme =
+      document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+}
 
 ScrollTrigger.create({
   start:'top -60',
@@ -17,13 +20,15 @@ document.querySelectorAll('.f-btn').forEach(btn => {
     document.querySelectorAll('[data-cat]').forEach(card => {
       const match = f === 'all' || card.dataset.cat === f;
       if (match) {
-        const display = card.classList.contains('proj-feat') ? 'grid' : 'block';
-        gsap.set(card, { display });
-        gsap.to(card, { opacity: 1, scale: 1, duration: .35, ease: 'power2.out', pointerEvents: 'auto' });
+        card.style.display = '';
+        gsap.fromTo(card,
+          { opacity: 0, scale: .97 },
+          { opacity: 1, scale: 1, duration: .35, ease: 'power2.out', overwrite: 'auto' }
+        );
       } else {
         gsap.to(card, {
-          opacity: 0, scale: .97, duration: .3, ease: 'power2.out',
-          onComplete: () => gsap.set(card, { display: 'none', pointerEvents: 'none' })
+          opacity: 0, scale: .97, duration: .25, ease: 'power2.in', overwrite: 'auto',
+          onComplete: () => { card.style.display = 'none'; }
         });
       }
     });

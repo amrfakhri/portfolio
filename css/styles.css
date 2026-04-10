@@ -42,7 +42,7 @@
   --nav-bg: rgba(245,245,245,0.88);
 }
 
-html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: clip; }
 body {
   background: var(--bg);
   color: var(--text1);
@@ -345,7 +345,7 @@ nav.scrolled {
 
 .hero-ctas {
   display: flex;
-  gap: 14px;
+  gap: 24px;
   margin-top: 48px;
   opacity: 0;
   transform: translateY(20px);
@@ -1278,9 +1278,9 @@ footer {
 @media(max-width:600px) {
   .proj-grid { grid-template-columns: 1fr; }
   .about-stats { grid-template-columns: 1fr 1fr; }
-  .hero-ctas { width: 100%; }
+  .hero-ctas { flex-direction: column; align-items: stretch; width: 100%; }
   .hero-ctas .btn-prim,
-  .hero-ctas .btn-ghost { flex: 1; justify-content: center; }
+  .hero-ctas .btn-ghost { justify-content: center; }
 }
 
 /* Accessibility / mobile improvements */

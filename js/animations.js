@@ -27,7 +27,7 @@ gsap.fromTo('#hero .hero-sub, #hero .hero-ctas',
 const philItems = document.querySelectorAll('.phil-item');
 const philDots  = document.querySelectorAll('.phil-dot');
 const N = philItems.length;
-document.getElementById('philosophy-wrap').style.height = (N * 50 + 100) + 'vh';
+document.getElementById('philosophy-wrap').style.height = (N + 1) * 100 + 'vh';
 
 function showPhil(i) {
   philItems.forEach((p,j) => {
@@ -50,7 +50,7 @@ ScrollTrigger.create({
   start: 'top top',
   end: 'bottom bottom',
   onUpdate: self => {
-    const idx = Math.min(Math.floor(self.progress * N), N-1);
+    const idx = Math.max(0, Math.min(Math.floor(self.progress * N), N-1));
     if (!philItems[idx].classList.contains('active')) showPhil(idx);
   }
 });
