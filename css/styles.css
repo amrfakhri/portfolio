@@ -1293,7 +1293,18 @@ footer {
   .about-grid { grid-template-columns: 1fr; }
   .exp-layout { grid-template-columns: 1fr; }
   .exp-left { position: static; }
-  .proj-feat { grid-template-columns: 1fr; }
+  .proj-feat {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+  .proj-feat .proj-img {
+    height: 280px;
+    min-height: unset;
+  }
+  .proj-feat .proj-info {
+    padding: 32px 28px;
+  }
+  .p-name { font-size: 32px; }
   .proj-grid { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
 }
