@@ -42,7 +42,7 @@
   --nav-bg: rgba(245,245,245,0.88);
 }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 body {
   background: var(--bg);
   color: var(--text1);
@@ -1241,6 +1241,11 @@ footer {
     padding-right: 24px;
   }
 
+  nav.scrolled {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .section { padding: 80px 24px; }
 
   #hero,
@@ -1251,6 +1256,15 @@ footer {
 
   .hero-stats-row { display: none; }
   .hero-scroll-hint { left: 24px; }
+
+  .work-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .filter-tabs { flex-wrap: wrap; }
 
   .about-grid { grid-template-columns: 1fr; }
   .exp-layout { grid-template-columns: 1fr; }
@@ -1270,4 +1284,5 @@ footer {
 @media (hover: none) {
   body { cursor: auto; }
   #cur, #cur-r { display: none !important; }
+  .f-btn, .nav-cta, .btn-upwork, .btn-email, .p-card, .p-link, .see-all { cursor: pointer; }
 }

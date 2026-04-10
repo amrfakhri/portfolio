@@ -15,8 +15,17 @@ document.querySelectorAll('.f-btn').forEach(btn => {
     btn.classList.add('on');
     const f = btn.dataset.f;
     document.querySelectorAll('[data-cat]').forEach(card => {
-      const match = f==='all' || card.dataset.cat===f;
-      gsap.to(card, { opacity:match?1:.15, scale:match?1:.97, duration:.35, ease:'power2.out', pointerEvents:match?'auto':'none' });
+      const match = f === 'all' || card.dataset.cat === f;
+      if (match) {
+        const display = card.classList.contains('proj-feat') ? 'grid' : 'block';
+        gsap.set(card, { display });
+        gsap.to(card, { opacity: 1, scale: 1, duration: .35, ease: 'power2.out', pointerEvents: 'auto' });
+      } else {
+        gsap.to(card, {
+          opacity: 0, scale: .97, duration: .3, ease: 'power2.out',
+          onComplete: () => gsap.set(card, { display: 'none', pointerEvents: 'none' })
+        });
+      }
     });
   });
 });
