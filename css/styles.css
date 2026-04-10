@@ -1091,7 +1091,7 @@ nav.scrolled {
 
 .contact-ctas {
   display: flex;
-  gap: 14px;
+  gap: 24px;
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 44px;
@@ -1190,9 +1190,6 @@ nav.scrolled {
   justify-content: center;
   color: var(--text2);
   text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  font-family: var(--font-h);
   transition: border-color .2s, color .2s, background .2s;
 }
 
@@ -1281,6 +1278,9 @@ footer {
   .hero-ctas { flex-direction: column; align-items: stretch; width: 100%; }
   .hero-ctas .btn-prim,
   .hero-ctas .btn-ghost { justify-content: center; }
+  .contact-ctas { flex-direction: column; align-items: stretch; }
+  .contact-ctas .btn-upwork,
+  .contact-ctas .btn-email { justify-content: center; }
 }
 
 /* Accessibility / mobile improvements */

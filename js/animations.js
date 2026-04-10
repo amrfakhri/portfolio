@@ -27,7 +27,6 @@ gsap.fromTo('#hero .hero-sub, #hero .hero-ctas',
 const philItems = document.querySelectorAll('.phil-item');
 const philDots  = document.querySelectorAll('.phil-dot');
 const N = philItems.length;
-document.getElementById('philosophy-wrap').style.height = (N + 1) * 100 + 'vh';
 
 function showPhil(i) {
   philItems.forEach((p,j) => {
@@ -46,9 +45,11 @@ function showPhil(i) {
 showPhil(0);
 
 ScrollTrigger.create({
-  trigger: '#philosophy-wrap',
+  trigger: '#philosophy-sticky',
   start: 'top top',
-  end: 'bottom bottom',
+  end: () => '+=' + (N * window.innerHeight),
+  pin: true,
+  pinSpacing: true,
   onUpdate: self => {
     const idx = Math.max(0, Math.min(Math.floor(self.progress * N), N-1));
     if (!philItems[idx].classList.contains('active')) showPhil(idx);
