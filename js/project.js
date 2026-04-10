@@ -49,8 +49,24 @@
 
   if (!project) { showError(); return; }
 
-  // ── Update page title ────────────────────────────────────
-  document.title = `${project.name} — Amr Fakhri`;
+  // ── Update page title & meta tags ───────────────────────
+  const pageUrl = `https://amrfakhri.com/project.html?id=${id}&frame=${frame}`;
+  const pageTitle = `${project.name} — Amr Fakhri`;
+  const pageDesc = project.description || `${project.name} — a project by Amr Fakhri, Senior UX/UI Designer.`;
+  const pageImage = project.image ? project.image : 'https://amrfakhri.com/assets/images/preview.png';
+
+  document.title = pageTitle;
+  document.querySelector('meta[name="description"]').setAttribute('content', pageDesc);
+  document.getElementById('canonical').setAttribute('href', pageUrl);
+
+  document.getElementById('og-url').setAttribute('content', pageUrl);
+  document.getElementById('og-title').setAttribute('content', pageTitle);
+  document.getElementById('og-desc').setAttribute('content', pageDesc);
+  document.getElementById('og-image').setAttribute('content', pageImage);
+
+  document.getElementById('tw-title').setAttribute('content', pageTitle);
+  document.getElementById('tw-desc').setAttribute('content', pageDesc);
+  document.getElementById('tw-image').setAttribute('content', pageImage);
 
   // ── Render hero ──────────────────────────────────────────
   document.getElementById('pd-tag').textContent   = project.tag;
