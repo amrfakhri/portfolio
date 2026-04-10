@@ -53,7 +53,7 @@
   const pageUrl = `https://amrfakhri.com/project.html?id=${id}&frame=${frame}`;
   const pageTitle = `${project.name} — Amr Fakhri`;
   const pageDesc = project.description || `${project.name} — a project by Amr Fakhri, Senior UX/UI Designer.`;
-  const pageImage = project.image ? project.image : 'https://amrfakhri.com/assets/images/preview.png';
+  const pageImage = project.image || 'https://placehold.co/1200x630/0a0a0a/C8F135?text=Amr+Fakhri+%E2%80%94+UX%2FUI+Designer';
 
   document.title = pageTitle;
   document.querySelector('meta[name="description"]').setAttribute('content', pageDesc);
