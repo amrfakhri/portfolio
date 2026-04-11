@@ -27,26 +27,36 @@
     return;
   }
 
+  // Sort by order ascending
+  projects.sort((a, b) => a.order - b.order);
+
   // ── Update count ─────────────────────────────────────────
   if (countEl) countEl.textContent = `${projects.length} projects`;
 
   // ── Render all cards ─────────────────────────────────────
-  function cardImg(p) {
-    if (p.image) return `style="background-image:url('${esc(p.image)}');background-size:cover;background-position:center;"`;
-    return '';
+  function coverStyle(p) {
+    return p.coverImage
+      ? `style="background-image:url('${esc(p.coverImage)}');background-size:cover;background-position:center;"`
+      : '';
   }
-  function cardLabel(p) {
-    if (p.image) return '';
-    return `<div class="p-card-img-lbl">${esc(p.label)}</div>`;
+  function coverLabel(p) {
+    return p.coverImage ? '' : `<div class="p-card-img-lbl">${esc(p.label)}</div>`;
+  }
+  function tagLine(p) {
+    return p.tags?.slice(0, 2).join(' · ') || '';
+  }
+  function projectUrl(p) {
+    const frame = p.category === 'app' || p.platform === 'mobile' ? 'mobile' : 'web';
+    return `/project.html?id=${esc(p.id)}&frame=${frame}`;
   }
 
   gridEl.innerHTML = projects.map((p, i) => `
-    <a class="p-card" data-cat="${esc(p.category)}" style="--d:${(i % 6) * 0.06}s" href="/project.html?id=${esc(p.id)}&frame=${p.category === 'app' || p.platform === 'mobile' ? 'mobile' : 'web'}">
-      <div class="p-card-img" ${cardImg(p)}>
-        ${cardLabel(p)}
+    <a class="p-card" data-cat="${esc(p.category)}" style="--d:${(i % 6) * 0.06}s" href="${projectUrl(p)}">
+      <div class="p-card-img" ${coverStyle(p)}>
+        ${coverLabel(p)}
       </div>
       <div class="p-card-body">
-        <div class="p-card-tag">${esc(p.tag)}</div>
+        <div class="p-card-tag">${esc(tagLine(p))}</div>
         <div class="p-card-name">${esc(p.name)}</div>
         <div class="p-card-year">${esc(p.year)}</div>
       </div>

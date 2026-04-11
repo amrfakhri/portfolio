@@ -53,7 +53,7 @@
   const pageUrl = `https://amrfakhri.com/project.html?id=${id}&frame=${frame}`;
   const pageTitle = `${project.name} — Amr Fakhri`;
   const pageDesc = project.description || `${project.name} — a project by Amr Fakhri, Senior UX/UI Designer.`;
-  const pageImage = project.image || 'https://placehold.co/1200x630/0a0a0a/C8F135?text=Amr+Fakhri+%E2%80%94+UX%2FUI+Designer';
+  const pageImage = project.coverImage || 'https://placehold.co/1200x630/0a0a0a/C8F135?text=Amr+Fakhri+%E2%80%94+UX%2FUI+Designer';
 
   document.title = pageTitle;
   document.querySelector('meta[name="description"]').setAttribute('content', pageDesc);
@@ -69,7 +69,7 @@
   document.getElementById('tw-image').setAttribute('content', pageImage);
 
   // ── Render hero ──────────────────────────────────────────
-  document.getElementById('pd-tag').textContent   = project.tag;
+  document.getElementById('pd-tag').textContent   = project.tags?.slice(0, 2).join(' · ') || '';
   document.getElementById('pd-year').textContent  = project.year;
   document.getElementById('pd-title').textContent = project.name;
   document.getElementById('pd-desc').textContent  = project.description;
@@ -82,12 +82,27 @@
   }
 
   // ── Render info ──────────────────────────────────────────
-  document.getElementById('pd-cat').textContent  = project.category;
-  document.getElementById('pd-yr').textContent   = project.year;
-  document.getElementById('pd-type').textContent = project.tag;
+  document.getElementById('pd-cat').textContent      = project.category;
+  document.getElementById('pd-role').textContent     = project.role || '—';
+  document.getElementById('pd-yr').textContent       = project.year || '—';
+  document.getElementById('pd-platform').textContent = project.platform || '—';
+  document.getElementById('pd-type').textContent     = project.tags?.join(', ') || '—';
+
+  // Tools: hide the whole block if empty
+  const toolsWrap = document.getElementById('pd-tools-wrap');
+  if (project.tools?.length) {
+    document.getElementById('pd-tools').textContent = project.tools.join(', ');
+  } else {
+    toolsWrap.hidden = true;
+  }
 
   // ── Build device frame ───────────────────────────────────
-  const images   = project.images?.length ? project.images : (project.image ? [project.image] : []);
+  // project.images is now [{ url, order, device }], already sorted by the API.
+  // Fall back to the single cover image if no relational images exist.
+  const imageUrls = project.images?.length
+    ? project.images.map(img => img.url)
+    : (project.coverImage ? [project.coverImage] : []);
+
   const isApp    = project.category === 'app' || project.platform === 'mobile';
   const deviceEl = document.getElementById('pd-device');
 
@@ -116,7 +131,7 @@
   // ── Render slides ────────────────────────────────────────
   const sliderSection = document.getElementById('pd-slider-section');
 
-  if (images.length === 0) {
+  if (imageUrls.length === 0) {
     sliderSection.hidden = true;
   } else {
     const track    = document.getElementById('pd-slides-track');
@@ -125,16 +140,16 @@
     const nextBtn  = document.getElementById('pd-next');
     const screenEl = document.getElementById('pd-device-screen');
 
-    track.innerHTML = images.map(src =>
-      `<div class="pd-slide" style="background-image:url('${esc(src)}')"></div>`
+    track.innerHTML = imageUrls.map(url =>
+      `<div class="pd-slide" style="background-image:url('${esc(url)}')"></div>`
     ).join('');
 
     // Hide controls if only one image
-    if (images.length === 1) {
+    if (imageUrls.length === 1) {
       document.getElementById('pd-controls').hidden = true;
     } else {
       // Render dots
-      images.forEach((_, i) => {
+      imageUrls.forEach((_, i) => {
         const dot = document.createElement('div');
         dot.className = 'pd-dot' + (i === 0 ? ' active' : '');
         dot.addEventListener('click', () => goTo(i));
@@ -149,11 +164,11 @@
         d.classList.toggle('active', i === current)
       );
       prevBtn.disabled = current === 0;
-      nextBtn.disabled = current === images.length - 1;
+      nextBtn.disabled = current === imageUrls.length - 1;
     }
 
     function goTo(idx) {
-      current = Math.max(0, Math.min(idx, images.length - 1));
+      current = Math.max(0, Math.min(idx, imageUrls.length - 1));
       gsap.to(track, { x: -(current * 100) + '%', duration: 0.55, ease: 'power3.out' });
       updateUI();
     }

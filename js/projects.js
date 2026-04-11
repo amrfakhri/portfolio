@@ -33,6 +33,12 @@
     return;
   }
 
+  // Sort: featured first, then by order ascending
+  projects.sort((a, b) => {
+    if (a.featured !== b.featured) return b.featured - a.featured;
+    return a.order - b.order;
+  });
+
   const featured = projects.filter(p => p.featured);
   const grid     = projects.filter(p => !p.featured).slice(0, 6);
   const total    = projects.length;
@@ -44,38 +50,34 @@
     textNode.textContent = `View all ${total} projects `;
   }
 
-  // ── Image helper ─────────────────────────────────────────
-  // If the project has a cover image, show it.
-  // If not, show the label placeholder (existing design).
-  function featImg(p) {
-    if (p.image) {
-      return `style="background-image:url('${esc(p.image)}');background-size:cover;background-position:center;"`;
-    }
-    return '';
+  // ── Helpers ──────────────────────────────────────────────
+  // coverImage replaces legacy `image` field
+  function coverStyle(p) {
+    const src = p.coverImage;
+    return src
+      ? `style="background-image:url('${esc(src)}');background-size:cover;background-position:center;"`
+      : '';
   }
-  function featLabel(p) {
-    if (p.image) return '';
-    return `<div class="proj-img-lbl" data-parallax="inner">${esc(p.label)}</div>`;
+  function coverLabel(p, cls) {
+    return p.coverImage ? '' : `<div class="${cls}">${esc(p.label)}</div>`;
   }
-  function cardImg(p) {
-    if (p.image) {
-      return `style="background-image:url('${esc(p.image)}');background-size:cover;background-position:center;"`;
-    }
-    return '';
+  // tags is now string[] — join first two for card display
+  function tagLine(p) {
+    return p.tags?.slice(0, 2).join(' · ') || '';
   }
-  function cardLabel(p) {
-    if (p.image) return '';
-    return `<div class="p-card-img-lbl">${esc(p.label)}</div>`;
+  function projectUrl(p) {
+    const frame = p.category === 'app' || p.platform === 'mobile' ? 'mobile' : 'web';
+    return `/project.html?id=${esc(p.id)}&frame=${frame}`;
   }
 
   // ── Render featured ──────────────────────────────────────
   featuredEl.innerHTML = featured.map((p, i) => `
     <div class="proj-feat${i % 2 === 1 ? ' rev' : ''}" data-cat="${esc(p.category)}">
-      <div class="proj-img parallax-wrap" ${featImg(p)}>
-        ${featLabel(p)}
+      <div class="proj-img parallax-wrap" ${coverStyle(p)}>
+        ${coverLabel(p, 'proj-img-lbl" data-parallax="inner')}
       </div>
       <div class="proj-info">
-        <div class="p-tag">${esc(p.tag)}</div>
+        <div class="p-tag">${esc(tagLine(p))}</div>
         <div class="p-name">${esc(p.name)}</div>
         <div class="p-desc">${esc(p.description)}</div>
         <a href="${esc(p.link)}" class="p-link"${p.link !== '#' ? ' target="_blank" rel="noopener"' : ''}>
@@ -88,12 +90,12 @@
 
   // ── Render grid ──────────────────────────────────────────
   gridEl.innerHTML = grid.map((p, i) => `
-    <a class="p-card" data-cat="${esc(p.category)}" style="--d:${i * 0.06}s" href="/project.html?id=${esc(p.id)}&frame=${p.category === 'app' || p.platform === 'mobile' ? 'mobile' : 'web'}">
-      <div class="p-card-img" ${cardImg(p)}>
-        ${cardLabel(p)}
+    <a class="p-card" data-cat="${esc(p.category)}" style="--d:${i * 0.06}s" href="${projectUrl(p)}">
+      <div class="p-card-img" ${coverStyle(p)}>
+        ${coverLabel(p, 'p-card-img-lbl')}
       </div>
       <div class="p-card-body">
-        <div class="p-card-tag">${esc(p.tag)}</div>
+        <div class="p-card-tag">${esc(tagLine(p))}</div>
         <div class="p-card-name">${esc(p.name)}</div>
         <div class="p-card-year">${esc(p.year)}</div>
       </div>
