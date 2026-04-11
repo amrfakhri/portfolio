@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary SEO -->
+  <title>All Projects — Amr Fakhri</title>
+  <meta name="description" content="Browse all UX/UI design projects by Amr Fakhri — fintech apps, mobile apps, web platforms, and product design.">
+  <meta name="author" content="Amr Fakhri">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://amrfakhri.com/projects.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://amrfakhri.com/projects.html">
+  <meta property="og:site_name" content="Amr Fakhri">
+  <meta property="og:title" content="All Projects — Amr Fakhri">
+  <meta property="og:description" content="Browse all UX/UI design projects by Amr Fakhri — fintech apps, mobile apps, web platforms, and product design.">
+  <meta property="og:image" content="https://placehold.co/1200x630/0a0a0a/C8F135?text=Amr+Fakhri+%E2%80%94+All+Projects">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@amrfakhri">
+  <meta name="twitter:title" content="All Projects — Amr Fakhri">
+  <meta name="twitter:description" content="Browse all UX/UI design projects by Amr Fakhri.">
+  <meta name="twitter:image" content="https://placehold.co/1200x630/0a0a0a/C8F135?text=Amr+Fakhri+%E2%80%94+All+Projects">
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#0a0a0a">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ─── CURSOR ──────────────────────────────────────── -->
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- ─── NAV ─────────────────────────────────────────── -->
+<nav id="nav">
+  <a href="/" class="nav-logo">Amr<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="/#work">Work</a></li>
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#experience">Experience</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <div class="nav-r">
+    <a href="/#contact" class="nav-cta">Hire me</a>
+  </div>
+</nav>
+
+<!-- ─── ALL PROJECTS ─────────────────────────────────── -->
+<section id="all-projects">
+  <div class="ap-header">
+    <a href="/" class="pd-back">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+    <div class="ap-heading-row">
+      <h1 class="ap-title g-up">All Projects</h1>
+      <span class="ap-count g-up" id="ap-count"></span>
+    </div>
+    <div class="filter-tabs g-up" id="ap-filters">
+      <button class="f-btn on" data-f="all">All</button>
+      <button class="f-btn" data-f="product">Product</button>
+      <button class="f-btn" data-f="app">App</button>
+      <button class="f-btn" data-f="web">Web</button>
+    </div>
+  </div>
+
+  <div class="proj-grid" id="ap-grid"></div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────── -->
+<footer>
+  <div class="f-copy">© 2025 Amr Fakhri</div>
+  <div class="f-made">Designed with <span>♥</span> in Cairo, Egypt</div>
+</footer>
+
+<!-- ─── GSAP ──────────────────────────────────────────── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/main.js"></script>
+<script src="js/all-projects.js"></script>
+</body>
+</html>

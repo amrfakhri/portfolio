@@ -34,7 +34,15 @@
   }
 
   const featured = projects.filter(p => p.featured);
-  const grid     = projects.filter(p => !p.featured);
+  const grid     = projects.filter(p => !p.featured).slice(0, 6);
+  const total    = projects.length;
+
+  // ── Update "View all" button label ──────────────────────
+  const seeAllBtn = document.getElementById('see-all-btn');
+  if (seeAllBtn) {
+    const textNode = seeAllBtn.firstChild;
+    textNode.textContent = `View all ${total} projects `;
+  }
 
   // ── Image helper ─────────────────────────────────────────
   // If the project has a cover image, show it.
