@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dcsk3p8br/image/upload/v1775977203/fav-ico-32_alyl1c.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dcsk3p8br/image/upload/v1775977202/fav-ico-16_bv3cgj.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://res.cloudinary.com/dcsk3p8br/image/upload/v1775977212/fav-ico-180_gtzpnx.png">
+
   <!-- Primary SEO -->
   <title>Amr Fakhri — Senior UX/UI Designer</title>
   <meta name="description" content="Amr Fakhri is a Senior UX/UI Designer with 7+ years of experience crafting premium digital products, fintech apps, and design systems.">
@@ -58,6 +63,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/contact-modal.css">
 </head>
 <body>
 
@@ -319,6 +325,9 @@
   <div class="f-made">Designed with <span>♥</span> in Cairo, Egypt</div>
 </footer>
 
+<!-- ─── EmailJS ───────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <!-- ─── GSAP ──────────────────────────────────────────── -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -327,5 +336,100 @@
 <script src="js/main.js"></script>
 <script src="js/projects.js"></script>
 <script src="js/experience.js"></script>
+
+<!-- ─── CONTACT MODAL ──────────────────────────────── -->
+<div id="contact-modal" class="cm-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+  <div class="cm-panel">
+
+    <button class="cm-close" aria-label="Close modal">
+      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="cm-header">
+      <div class="cm-label">Start a Project</div>
+      <h2 class="cm-title" id="cm-title">Let's work<br><span class="acc">together.</span></h2>
+    </div>
+
+    <form class="cm-form" id="cm-form" novalidate>
+
+      <div class="cm-row">
+        <div class="cm-field">
+          <label for="cm-name">Full Name <span aria-hidden="true">*</span></label>
+          <input id="cm-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+        </div>
+        <div class="cm-field">
+          <label for="cm-email">Email <span aria-hidden="true">*</span></label>
+          <input id="cm-email" name="email" type="email" autocomplete="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+
+      <div class="cm-field">
+        <label>Project Type</label>
+        <div class="cm-chips" role="group" aria-label="Select a project type">
+          <button type="button" class="cm-chip" data-value="Mobile App">Mobile App</button>
+          <button type="button" class="cm-chip" data-value="Web Design">Web Design</button>
+          <button type="button" class="cm-chip" data-value="Design System">Design System</button>
+          <button type="button" class="cm-chip" data-value="UX Audit">UX Audit</button>
+          <button type="button" class="cm-chip" data-value="Other">Other</button>
+        </div>
+        <input type="hidden" id="cm-type" name="project_type">
+      </div>
+
+      <div class="cm-field">
+        <label for="cm-budget">Budget</label>
+        <select id="cm-budget" name="budget">
+          <option value="">Select a range (optional)</option>
+          <option value="Under $1,000">Under $1,000</option>
+          <option value="$1,000 – $3,000">$1,000 – $3,000</option>
+          <option value="$3,000 – $7,000">$3,000 – $7,000</option>
+          <option value="$7,000 – $15,000">$7,000 – $15,000</option>
+          <option value="$15,000+">$15,000+</option>
+        </select>
+      </div>
+
+      <div class="cm-field">
+        <label for="cm-message">Message <span aria-hidden="true">*</span></label>
+        <textarea id="cm-message" name="message" placeholder="Tell me about your project, goals, and timeline…" rows="4" required></textarea>
+      </div>
+
+      <!-- State: Loading -->
+      <div class="cm-state cm-loading" role="status">
+        <div class="cm-spinner"></div>
+        <span>Sending your message…</span>
+      </div>
+
+      <!-- State: Success -->
+      <div class="cm-state cm-success" role="status">
+        <div class="cm-success-icon">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <polyline points="20,6 9,17 4,12"/>
+          </svg>
+        </div>
+        <p>Your message has been sent!</p>
+        <p class="cm-success-sub">I'll get back to you within 24 hours.</p>
+      </div>
+
+      <!-- State: Error -->
+      <div class="cm-state cm-error" role="alert">
+        <p>Something went wrong. Please try again or reach out directly at<br><a href="mailto:amr.fakhri@gmail.com">amr.fakhri@gmail.com</a></p>
+        <button type="button" class="cm-retry">Try again</button>
+      </div>
+
+      <div class="cm-actions">
+        <button type="submit" class="cm-submit">
+          Send Message
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script src="js/contact-modal.js"></script>
 </body>
 </html>

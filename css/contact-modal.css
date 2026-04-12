@@ -1,0 +1,405 @@
+/* ══════════════════════════════════════════════════════
+   CONTACT MODAL
+   Uses only variables from styles.css — no hardcoded
+   colours or fonts unless strictly necessary.
+══════════════════════════════════════════════════════ */
+
+/* ─── Overlay ─────────────────────────────────────── */
+.cm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cm-overlay.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ─── Panel ───────────────────────────────────────── */
+.cm-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 44px 48px;
+  position: relative;
+  will-change: transform, opacity;
+  box-shadow:
+    0 0 0 1px rgba(200,241,53,.06),
+    0 32px 80px rgba(0,0,0,.55);
+}
+
+.cm-panel::-webkit-scrollbar { width: 2px; }
+.cm-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ─── Close button ────────────────────────────────── */
+.cm-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text2);
+  cursor: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, color .2s, transform .25s cubic-bezier(.34,1.56,.64,1);
+}
+
+.cm-close:hover {
+  background: var(--border);
+  color: var(--text1);
+  transform: rotate(90deg);
+}
+
+/* ─── Header ──────────────────────────────────────── */
+.cm-header { margin-bottom: 30px; }
+
+.cm-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.cm-label::before {
+  content: '';
+  width: 18px;
+  height: 1.5px;
+  background: var(--accent);
+  display: block;
+}
+
+.cm-title {
+  font-family: var(--font-h);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  color: var(--text1);
+}
+
+.cm-title .acc { color: var(--accent); }
+
+/* ─── Form layout ─────────────────────────────────── */
+.cm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.cm-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* ─── Field ───────────────────────────────────────── */
+.cm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cm-field label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+  color: var(--text2);
+  transition: color .2s;
+}
+
+.cm-field:focus-within > label { color: var(--accent); }
+
+/* ─── Inputs ──────────────────────────────────────── */
+.cm-field input,
+.cm-field textarea,
+.cm-field select {
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  color: var(--text1);
+  font-family: var(--font-b);
+  font-size: 14px;
+  padding: 12px 15px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+  width: 100%;
+  cursor: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.cm-field input::placeholder,
+.cm-field textarea::placeholder { color: var(--text3); }
+
+.cm-field input:focus,
+.cm-field textarea:focus,
+.cm-field select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200,241,53,.1);
+  background: var(--bg2);
+}
+
+.cm-field input.is-invalid,
+.cm-field textarea.is-invalid {
+  border-color: #e05454;
+  box-shadow: 0 0 0 3px rgba(224,84,84,.1);
+}
+
+.cm-field textarea {
+  resize: none;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+/* select dropdown arrow */
+.cm-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+/* ─── Chips (project type) ────────────────────────── */
+.cm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cm-chip {
+  padding: 8px 16px;
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  color: var(--text2);
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: none;
+  transition: border-color .2s, color .2s, background .2s, transform .15s;
+}
+
+.cm-chip:hover {
+  border-color: var(--text2);
+  color: var(--text1);
+}
+
+.cm-chip.selected {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(200,241,53,.07);
+}
+
+.cm-chip.selected:hover { transform: scale(1.03); }
+
+/* ─── Actions ─────────────────────────────────────── */
+.cm-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+.cm-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 32px;
+  background: var(--accent);
+  color: #0A0A0A;
+  font-family: var(--font-b);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 100px;
+  cursor: none;
+  transition: transform .2s, box-shadow .2s, opacity .2s;
+}
+
+.cm-submit:hover:not(:disabled) {
+  transform: scale(1.04);
+  box-shadow: 0 0 28px rgba(200,241,53,.4);
+}
+
+.cm-submit:disabled { opacity: .48; }
+
+/* ─── States: hidden by default ──────────────────── */
+.cm-state { display: none; }
+
+/* loading */
+.cm-form[data-state="loading"] > .cm-row,
+.cm-form[data-state="loading"] > .cm-field,
+.cm-form[data-state="loading"] > .cm-actions { display: none; }
+
+.cm-form[data-state="loading"] > .cm-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 44px 0;
+  color: var(--text2);
+  font-size: 14px;
+}
+
+/* success */
+.cm-form[data-state="success"] > .cm-row,
+.cm-form[data-state="success"] > .cm-field,
+.cm-form[data-state="success"] > .cm-actions { display: none; }
+
+.cm-form[data-state="success"] > .cm-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 44px 0;
+  text-align: center;
+}
+
+/* error */
+.cm-form[data-state="error"] > .cm-row,
+.cm-form[data-state="error"] > .cm-field,
+.cm-form[data-state="error"] > .cm-actions { display: none; }
+
+.cm-form[data-state="error"] > .cm-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 44px 0;
+  text-align: center;
+}
+
+/* ─── Spinner ─────────────────────────────────────── */
+.cm-spinner {
+  width: 34px;
+  height: 34px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: cm-spin .8s linear infinite;
+}
+
+@keyframes cm-spin { to { transform: rotate(360deg); } }
+
+/* ─── Success icon ────────────────────────────────── */
+.cm-success-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(200,241,53,.1);
+  border: 1.5px solid rgba(200,241,53,.35);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cm-success > p:first-of-type {
+  font-family: var(--font-h);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.cm-success-sub {
+  font-size: 14px;
+  color: var(--text2);
+  margin-top: -4px;
+}
+
+/* ─── Error ───────────────────────────────────────── */
+.cm-error > p {
+  font-size: 15px;
+  color: var(--text2);
+  max-width: 320px;
+  line-height: 1.65;
+}
+
+.cm-error a { color: var(--accent); text-decoration: none; }
+.cm-error a:hover { text-decoration: underline; }
+
+.cm-retry {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  color: var(--text2);
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: none;
+  transition: border-color .2s, color .2s;
+}
+
+.cm-retry:hover { border-color: var(--text2); color: var(--text1); }
+
+/* ─── Inline validation error ─────────────────────── */
+.cm-field-error {
+  font-size: 11px;
+  color: #e05454;
+  margin-top: -2px;
+}
+
+/* ─── Mobile ──────────────────────────────────────── */
+@media (max-width: 600px) {
+  .cm-panel {
+    padding: 28px 20px;
+    border-radius: 16px;
+    max-height: 92vh;
+  }
+
+  .cm-row { grid-template-columns: 1fr; }
+
+  .cm-title { letter-spacing: -1px; }
+}
+
+/* ─── Touch devices ───────────────────────────────── */
+@media (hover: none) {
+  .cm-close,
+  .cm-submit,
+  .cm-chip,
+  .cm-retry { cursor: pointer; }
+
+  .cm-field input,
+  .cm-field textarea,
+  .cm-field select { cursor: text; }
+}
+
+/* ─── Keyboard focus rings ────────────────────────── */
+.cm-close:focus-visible,
+.cm-submit:focus-visible,
+.cm-chip:focus-visible,
+.cm-retry:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* inputs use border+shadow as focus indicator already */
+.cm-field input:focus-visible,
+.cm-field textarea:focus-visible,
+.cm-field select:focus-visible { outline: none; }

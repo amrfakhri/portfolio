@@ -312,7 +312,7 @@ nav.scrolled {
 
 .hero-title {
   font-family: var(--font-h);
-  font-size: clamp(38px,7.5vw,110px);
+  font-size: clamp(48px,7.5vw,110px);
   font-weight: 800;
   letter-spacing: -3.5px;
   width: 100%;
