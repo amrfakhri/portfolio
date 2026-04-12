@@ -238,6 +238,7 @@
   border: none;
   border-radius: 100px;
   cursor: none;
+  text-decoration: none;
   transition: transform .2s, box-shadow .2s, opacity .2s;
 }
 
@@ -403,3 +404,98 @@
 .cm-field input:focus-visible,
 .cm-field textarea:focus-visible,
 .cm-field select:focus-visible { outline: none; }
+
+/* ═══════════════════════════════════════════════════════
+   TAB SYSTEM
+═══════════════════════════════════════════════════════ */
+
+/* ─── Tab switcher pill ───────────────────────────── */
+.cm-tabs {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 3px;
+  margin-bottom: 24px;
+}
+
+/* ─── Tab buttons ─────────────────────────────────── */
+.cm-tab {
+  position: relative;
+  z-index: 1;
+  padding: 7px 22px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  font-family: var(--font-b);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: none;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.cm-tab:hover { color: var(--text1); }
+.cm-tab.is-active { color: var(--text1); }
+
+.cm-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ─── Sliding pill indicator ──────────────────────── */
+.cm-tab-indicator {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  height: calc(100% - 6px);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  pointer-events: none;
+  z-index: 0;
+  will-change: left, width;
+  /* CSS fallback before JS positions it */
+  width: 76px;
+}
+
+/* ─── Tab panels ──────────────────────────────────── */
+.cm-tabpanel[hidden] { display: none; }
+
+/* ═══════════════════════════════════════════════════════
+   MEETING TAB
+═══════════════════════════════════════════════════════ */
+
+.cm-meeting {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cm-meeting-title {
+  font-family: var(--font-h);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text1);
+}
+
+.cm-meeting-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-top: -4px;
+}
+
+/* ─── Mobile adjustments ──────────────────────────── */
+@media (max-width: 600px) {
+  .cm-tab { padding: 7px 16px; font-size: 12px; cursor: pointer; }
+}
+
+/* ─── Touch devices ───────────────────────────────── */
+@media (hover: none) {
+  .cm-tab { cursor: pointer; }
+}

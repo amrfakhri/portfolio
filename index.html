@@ -352,6 +352,18 @@
       <h2 class="cm-title" id="cm-title">Let's work<br><span class="acc">together.</span></h2>
     </div>
 
+    <!-- ─── Tab switcher ──────────────────────────────── -->
+    <div class="cm-tabs" role="tablist" aria-label="Contact options">
+      <button class="cm-tab is-active" role="tab" aria-selected="true"
+              aria-controls="cm-panel-project" id="cm-tab-project">Project</button>
+      <button class="cm-tab" role="tab" aria-selected="false" tabindex="-1"
+              aria-controls="cm-panel-meeting" id="cm-tab-meeting">Meeting</button>
+      <div class="cm-tab-indicator" aria-hidden="true"></div>
+    </div>
+
+    <!-- ─── Tab panel: Project ───────────────────────── -->
+    <div class="cm-tabpanel" id="cm-panel-project" role="tabpanel" aria-labelledby="cm-tab-project">
+
     <form class="cm-form" id="cm-form" novalidate>
 
       <div class="cm-row">
@@ -427,6 +439,25 @@
       </div>
 
     </form>
+
+    </div><!-- /cm-panel-project -->
+
+    <!-- ─── Tab panel: Meeting ───────────────────────── -->
+    <div class="cm-tabpanel" id="cm-panel-meeting" role="tabpanel" aria-labelledby="cm-tab-meeting" hidden>
+      <div class="cm-meeting">
+        <h3 class="cm-meeting-title">Book a meeting</h3>
+        <p class="cm-meeting-desc">Schedule a quick 30-minute call to discuss your project.</p>
+        <div class="cm-actions">
+          <a href="https://calendar.app.google/zwnWDTkiKqfwyWNF6" target="_blank" rel="noopener noreferrer" class="cm-submit">
+            Book a call
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div><!-- /cm-panel-meeting -->
+
   </div>
 </div>
 
