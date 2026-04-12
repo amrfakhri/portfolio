@@ -2,5 +2,8 @@
   "version": 2,
   "framework": null,
   "outputDirectory": ".",
-  "buildCommand": null
+  "buildCommand": null,
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/api/sitemap" }
+  ]
 }
