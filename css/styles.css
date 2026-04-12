@@ -1825,6 +1825,7 @@ a.p-card { text-decoration: none; display: block; }
 
 /* ─── Stars ───────────────────────────────────────── */
 .rv-stars {
+  align-self: center;
   display: flex;
   gap: 3px;
   color: var(--accent);
@@ -1832,6 +1833,7 @@ a.p-card { text-decoration: none; display: block; }
 
 /* ─── Quote text ──────────────────────────────────── */
 .rv-text {
+  text-align: center;
   font-size: 15px;
   line-height: 1.75;
   color: var(--text1);
@@ -1841,6 +1843,7 @@ a.p-card { text-decoration: none; display: block; }
 
 /* ─── Footer ──────────────────────────────────────── */
 .rv-footer {
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 4px;
