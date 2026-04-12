@@ -142,12 +142,15 @@ cmOverlay?.addEventListener('keydown', e => {
   }
 });
 
-// ─── Chip selection ───────────────────────────────────
+// ─── Chip selection (multi-select) ───────────────────
 cmChips?.forEach(chip => {
   chip.addEventListener('click', () => {
-    cmChips.forEach(c => c.classList.remove('selected'));
-    chip.classList.add('selected');
-    if (cmTypeInput) cmTypeInput.value = chip.dataset.value;
+    chip.classList.toggle('selected');
+    // Sync hidden input with all currently selected values
+    const selected = [...cmChips]
+      .filter(c => c.classList.contains('selected'))
+      .map(c => c.dataset.value);
+    if (cmTypeInput) cmTypeInput.value = selected.join(', ');
   });
 });
 
@@ -218,6 +221,7 @@ cmForm?.addEventListener('submit', async e => {
     setModalState('success');
     cmForm.reset();
     cmChips?.forEach(c => c.classList.remove('selected'));
+    if (cmTypeInput) cmTypeInput.value = '';
   } catch (err) {
     console.error('[ContactModal] EmailJS send failed:', err);
     setModalState('error');
