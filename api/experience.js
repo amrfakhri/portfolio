@@ -1,9 +1,12 @@
+import { getNotionDbs } from './_notion-dbs.js';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   try {
+    const dbs = await getNotionDbs(process.env.NOTION_TOKEN);
     const response = await fetch(
-      `https://api.notion.com/v1/databases/${process.env.NOTION_EXPERIENCE_DB_ID}/query`,
+      `https://api.notion.com/v1/databases/${dbs.experience}/query`,
       {
         method: 'POST',
         headers: {

@@ -21,6 +21,8 @@
  *   label:       string
  * }} Project
  */
+import { getNotionDbs } from './_notion-dbs.js';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -31,11 +33,13 @@ export default async function handler(req, res) {
       'Content-Type': 'application/json',
     };
 
+    const dbs = await getNotionDbs(process.env.NOTION_TOKEN);
+
     // ── 1. Fetch all published projects ───────────────────────────────────
     let projectPages = [], cursor;
     do {
       const response = await fetch(
-        `https://api.notion.com/v1/databases/${process.env.NOTION_DATABASE_ID}/query`,
+        `https://api.notion.com/v1/databases/${dbs.projects}/query`,
         {
           method: 'POST',
           headers,
@@ -60,7 +64,7 @@ export default async function handler(req, res) {
     cursor = undefined;
     do {
       const response = await fetch(
-        `https://api.notion.com/v1/databases/${process.env.NOTION_IMAGES_DB_ID}/query`,
+        `https://api.notion.com/v1/databases/${dbs.images}/query`,
         {
           method: 'POST',
           headers,
