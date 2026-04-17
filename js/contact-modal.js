@@ -3,6 +3,13 @@
    Dependencies: GSAP (already loaded), EmailJS SDK
 ══════════════════════════════════════════════════════ */
 
+(function() {
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'css/contact-modal.css';
+  document.head.appendChild(link);
+})();
+
 // ─── EmailJS config ──────────────────────────────────
 // Setup (takes ~5 min):
 // 1. Sign up at https://www.emailjs.com  (free: 200 emails/month)

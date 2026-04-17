@@ -34,9 +34,15 @@
   if (countEl) countEl.textContent = `${projects.length} projects`;
 
   // ── Render all cards ─────────────────────────────────────
+  function cloudinaryWebP(url, width) {
+    if (!url || !url.includes('res.cloudinary.com')) return url;
+    return url.replace('/upload/', `/upload/f_webp,q_auto,w_${width}/`);
+  }
+
   function coverStyle(p) {
-    return p.coverImage
-      ? `style="background-image:url('${esc(p.coverImage)}');background-size:cover;background-position:center;"`
+    const src = cloudinaryWebP(p.coverImage, 800);
+    return src
+      ? `style="background-image:url('${esc(src)}');background-size:cover;background-position:center;"`
       : '';
   }
   function coverLabel(p) {

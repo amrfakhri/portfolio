@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X8CTGKDSKK"></script>
+  <!-- Google Analytics (deferred after load to avoid forced reflow on LCP) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-X8CTGKDSKK');
+    window.addEventListener('load', function() {
+      var s = document.createElement('script');
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-X8CTGKDSKK';
+      s.async = true;
+      document.head.appendChild(s);
+    });
   </script>
 
   <!-- Favicons -->
@@ -70,9 +75,9 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/contact-modal.css">
 </head>
 <body>
 
@@ -234,9 +239,11 @@
   <div class="about-grid">
     <div class="about-photo g-scale">
       <img
-        src="https://res.cloudinary.com/dcsk3p8br/image/upload/v1775912883/Gemini_Generated_Image_1gjkze1gjkze1gjk_vju8y3.png"
+        src="https://res.cloudinary.com/dcsk3p8br/image/upload/f_webp,q_auto,w_600/v1775912883/Gemini_Generated_Image_1gjkze1gjkze1gjk_vju8y3.png"
         alt="Amr Fakhri"
         class="about-photo-img"
+        loading="lazy"
+        width="600" height="600"
         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
       >
       <div class="about-photo-inner" style="display:none">AF</div>
@@ -352,17 +359,17 @@
 </footer>
 
 <!-- ─── EmailJS ───────────────────────────────────────── -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <!-- ─── GSAP ──────────────────────────────────────────── -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="js/cursor.js"></script>
-<script src="js/animations.js"></script>
-<script src="js/main.js"></script>
-<script src="js/projects.js"></script>
-<script src="js/experience.js"></script>
-<script src="js/reviews.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="js/cursor.js"></script>
+<script defer src="js/animations.js"></script>
+<script defer src="js/main.js"></script>
+<script defer src="js/projects.js"></script>
+<script defer src="js/experience.js"></script>
+<script defer src="js/reviews.js"></script>
 
 <!-- ─── CONTACT MODAL ──────────────────────────────── -->
 <div id="contact-modal" class="cm-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cm-title">
@@ -488,6 +495,6 @@
   </div>
 </div>
 
-<script src="js/contact-modal.js"></script>
+<script defer src="js/contact-modal.js"></script>
 </body>
 </html>

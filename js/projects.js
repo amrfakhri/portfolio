@@ -51,9 +51,14 @@
   }
 
   // ── Helpers ──────────────────────────────────────────────
+  function cloudinaryWebP(url, width) {
+    if (!url || !url.includes('res.cloudinary.com')) return url;
+    return url.replace('/upload/', `/upload/f_webp,q_auto,w_${width}/`);
+  }
+
   // coverImage replaces legacy `image` field
   function coverStyle(p) {
-    const src = p.coverImage;
+    const src = cloudinaryWebP(p.coverImage, 800);
     return src
       ? `style="background-image:url('${esc(src)}');background-size:cover;background-position:center;"`
       : '';
